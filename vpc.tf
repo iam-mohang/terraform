@@ -29,3 +29,31 @@ resource "aws_subnet" "private2" {
   cidr_block = "10.0.4.0/24"
   availability_zone = "us-east-1b"
 }
+
+resource "aws_security_group_rule" "eks_ingress_http" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]  # Allow traffic from any source
+  security_group_id = aws_security_group.eks_cluster.id
+}
+
+resource "aws_security_group_rule" "eks_ingress_https" {
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]  # Allow traffic from any source
+  security_group_id = aws_security_group.eks_cluster.id
+}
+
+resource "aws_security_group_rule" "eks_egress_all" {
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"  # Allow all protocols
+  cidr_blocks       = ["0.0.0.0/0"]  # Allow traffic to any destination
+  security_group_id = aws_security_group.eks_cluster.id
+}
+
