@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx
   namespace: prod
 spec:
   replicas: 2
@@ -14,21 +14,8 @@ spec:
         app: nginx
     spec:
       containers:
-        - name: nginx
-          image: nginx:1.19.2
-          ports:
-            - containerPort: 80
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx
-  namespace: prod
-spec:
-  selector:
-    app: nginx
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-  type: ClusterIP
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
