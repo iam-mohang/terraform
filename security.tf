@@ -17,7 +17,7 @@ resource "aws_security_group_rule" "all_worker_mgmt_ingress" {
 resource "aws_security_group_rule" "all_worker_mgmt_ingress" {
   description       = "allow inbound traffic from eks"
   from_port         = 80
-  protocol          = "-1"
+  protocol          = "TCP"
   to_port           = 80
   security_group_id = aws_security_group.all_worker_mgmt.id
   type              = "ingress"
