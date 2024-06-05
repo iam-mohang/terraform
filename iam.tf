@@ -41,9 +41,9 @@ data "aws_iam_policy_document" "aws_load_balancer_controller_policy" {
   }
 }
 
-# Create the policy
+# Create the policy with a different name
 resource "aws_iam_policy" "aws_load_balancer_controller_policy" {
-  name        = "AWSLoadBalancerControllerIAMPolicy"
+  name        = "AWSLoadBalancerControllerIAMPolicyNew" # Changed name to avoid conflict
   description = "Policy for EKS Load Balancer Controller"
   policy      = data.aws_iam_policy_document.aws_load_balancer_controller_policy.json
 }
@@ -58,4 +58,5 @@ resource "aws_iam_role_policy_attachment" "eks_lb_controller_attach" {
     aws_iam_policy.aws_load_balancer_controller_policy
   ]
 }
+
 
