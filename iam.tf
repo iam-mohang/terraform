@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "us-east-1"  # Change to your desired region
-}
-
 # Fetch the caller identity
 data "aws_caller_identity" "current" {}
 
